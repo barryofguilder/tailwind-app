@@ -12,28 +12,28 @@ module.exports = function(defaults) {
   //       readme file in the section titled "Switching from SASS".
   //       For now, I'm just leaving the file name as `app.css`. It still allows you to write SASS
   //       in it, you just don't get the syntax highlighting.
-  let app = new EmberApp(defaults, {
-    postcssOptions: {
-      extension: 'scss',
-      enabled: true,
-      parser: require('postcss-scss'),
-      compile: {
-        plugins: [
-          require('@csstools/postcss-sass'),
-          require('tailwindcss')
-        ]
-      }
-    }
-  });
-  // This will compile Tailwind using just plain CSS.
   // let app = new EmberApp(defaults, {
   //   postcssOptions: {
+  //     extension: 'scss',
+  //     enabled: true,
+  //     parser: require('postcss-scss'),
   //     compile: {
   //       plugins: [
-  //         require('tailwindcss')
+  //         require('@csstools/postcss-sass'),
+  //         require('tailwindcss')('app/tailwind/config.js')
   //       ]
   //     }
   //   }
   // });
+  // This will compile Tailwind using just plain CSS.
+  let app = new EmberApp(defaults, {
+    postcssOptions: {
+      compile: {
+        plugins: [
+          require('tailwindcss')('app/tailwind/config.js')
+        ]
+      }
+    }
+  });
   return app.toTree();
 };
